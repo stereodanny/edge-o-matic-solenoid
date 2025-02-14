@@ -150,7 +150,7 @@ static void orgasm_control_updateArousal() {
 
     // Increment arousal
     if (p_check < arousal_state.last_value) {                      // falling edge of peak
-        if (arousal_state.last_value > arousal_state.peak_start) { // first tick past peak?
+        /* if (arousal_state.last_value > arousal_state.peak_start) { // first tick past peak?
             if (arousal_state.last_value - arousal_state.peak_start >=
                 Config.sensitivity_threshold / 10) { // big peak
 
@@ -161,6 +161,23 @@ static void orgasm_control_updateArousal() {
 
                 arousal_state.peak_start = p_check;
             }
+        } */
+       // Calculate the difference from the peak_start to the last_value:
+        int16_t peak_diff = (int16_t)(arousal_state.last_value - arousal_state.peak_start);
+
+        // If we have a big enough peak:
+        if (peak_diff >= (Config.sensitivity_threshold / 10)) {
+            // Convert sensor_sensitivity (0..255) into a 0..1.0 scale factor
+            float sens_scale = (float)Config.sensor_sensitivity / 64.0f;
+
+            // Apply that scale factor to the difference
+            float scaled_increment = peak_diff * sens_scale;
+
+            // Add the scaled increment to arousal
+            arousal_state.arousal += (int16_t)roundf(scaled_increment);
+
+            // Reset the peak start
+            arousal_state.peak_start = p_check;
         }
 
         if (p_check < arousal_state.peak_start) {

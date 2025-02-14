@@ -7,6 +7,7 @@
 #include "config_defs.h"
 #include "console.h"
 #include "eom-hal.h"
+#include "driver/adc.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "orgasm_control.h"
@@ -176,6 +177,8 @@ void app_main() {
     TickType_t boot_tick = xTaskGetTickCount();
 
     eom_hal_init();
+    //adc1_config_channel_atten(ADC1_CHANNEL_6, ADC_ATTEN_DB_2_5);
+
     ui_init();
     storage_init();
     console_init();

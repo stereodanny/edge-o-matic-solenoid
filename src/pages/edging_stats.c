@@ -144,10 +144,10 @@ float _get_arousal_bar_max(void) {
 
 static void _draw_meters(u8g2_t* d, orgasm_output_mode_t mode) {
     if (mode == OC_MANUAL_CONTROL) {
-        ui_draw_bar_graph(d, 10, 'S', eom_hal_get_motor_speed(), 255);
+        ui_draw_bar_graph(d, 10, 'S', (eom_hal_get_motor_speed()), 255);
     } else {
         ui_draw_shaded_bar_graph(
-            d, 10, 'S', eom_hal_get_motor_speed(), 255, Config.motor_max_speed
+            d, 10, 'S', (eom_hal_get_motor_speed()), 255, Config.motor_max_speed
         );
     }
 
@@ -165,7 +165,7 @@ static void _draw_meters(u8g2_t* d, orgasm_output_mode_t mode) {
 
 static void _draw_speed_change(u8g2_t* d) {
     char msg[15];
-    snprintf(msg, sizeof(msg), _("Speed: %0.0f%%"), (float)eom_hal_get_motor_speed() / 2.55f);
+    snprintf(msg, sizeof(msg), _("Speed: %0.0f%%"), (float)(eom_hal_get_motor_speed()) / 2.55f);
 
     u8g2_SetFont(d, UI_FONT_DEFAULT);
     u8g2_SetDrawColor(d, 1);
@@ -297,6 +297,7 @@ on_button(eom_hal_button_t button, eom_hal_button_event_t event, void* arg) {
 
         orgasm_control_set_output_mode(OC_MANUAL_CONTROL);
         eom_hal_set_motor_speed(0x00);
+         
         event_manager_dispatch(EVT_SPEED_CHANGE, NULL, 0);
         bluetooth_driver_broadcast_speed(0x00);
         // websocket_server_broadcast_speed(0x00);
