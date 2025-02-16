@@ -2,6 +2,8 @@
 
 This is a variation of the firmware for the [Edge-o-Matic 3000 by MausTec](https://github.com/MausTec/edge-o-matic-3000) that adds a "Solenoid mode" which outputs a binary on/off at a certain BPM instead of the PWM signal for a vibrator motor.
 
+The "Sensor Sensitivity" function has been modified for this author's particular use case, but setting this to a value of 64 (25%) will equate to a prescalar of 1.0 (no change).
+
 ## Warnings and Cautions
 
 Use at your own risk. BACK UP YOUR CONFIG FILE on your SD Card before using. If you revert to the official firmware you'll need to reload your original config file. 
