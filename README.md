@@ -1,6 +1,6 @@
 # Edge-o-Matic 3000 with Solenoid control
 
-This is a variation of the firmware for the Edge-o-Matic 3000 by Maustec that adds a "Solenoid mode" which outputs a binary on/off at a certain BPM instead of the PWM signal for a vibrator motor.
+This is a variation of the firmware for the [Edge-o-Matic 3000 by MausTec](https://github.com/MausTec/edge-o-matic-3000) that adds a "Solenoid mode" which outputs a binary on/off at a certain BPM instead of the PWM signal for a vibrator motor.
 
 ## Warnings and Cautions
 
